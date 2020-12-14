@@ -31,7 +31,7 @@ namespace ClearBank.DeveloperTest.Services
                     {
                         result.Success = true;
                     }
-                    else if (account.Balance > request.Amount)
+                    else if (account.Balance >= request.Amount)
                     {
                         result.Success = true;
                     }
