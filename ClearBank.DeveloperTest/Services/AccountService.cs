@@ -5,7 +5,7 @@ namespace ClearBank.DeveloperTest.Services
 {
     public class AccountService : IAccountService
     {
-        private IAccountDataStore accountDataStore;
+        private readonly IAccountDataStore accountDataStore;
         
         public AccountService(IAccountDataStore store)
         {

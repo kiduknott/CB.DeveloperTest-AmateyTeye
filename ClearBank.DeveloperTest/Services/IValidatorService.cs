@@ -1,6 +1,9 @@
-﻿namespace ClearBank.DeveloperTest.Services
+﻿using ClearBank.DeveloperTest.Types;
+
+namespace ClearBank.DeveloperTest.Services
 {
-    public class IValidatorService
+    public interface IValidatorService
     {
+        public MakePaymentResult ValidatePayment(Account account, MakePaymentRequest request);
     }
 }

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ClearBank.DeveloperTest.Configuration;
+﻿using ClearBank.DeveloperTest.Configuration;
 using ClearBank.DeveloperTest.Data;
-using ClearBank.DeveloperTest.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ClearBank.DeveloperTest.ServiceFactories
 {
     public class ServiceFactory
     {
-        internal ServiceProvider serviceProvider;
+        private readonly ServiceProvider serviceProvider;
 
         public ServiceFactory(IConfigManager configManager)
         {
