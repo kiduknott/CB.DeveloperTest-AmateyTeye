@@ -30,20 +30,35 @@ namespace ClearBank.DeveloperTest.Tests
         }
 
         [Test]
-        [InlineAutoData(AccountStatus.Live, "99999999999.99")]
-        [InlineAutoData(AccountStatus.Live, "0.01")]
-        [InlineAutoData(AccountStatus.Live, "0.00")]
-        [InlineAutoData(AccountStatus.Live, "-0.01")]
-        [InlineAutoData(AccountStatus.Disabled, "0.01")]
-        [InlineAutoData(AccountStatus.InboundPaymentsOnly, "0.01")]
-        public void Account_With_Bacs_Allowed_Always_Returns_False_For_Bacs_Payments(AccountStatus accountStatus,
-            string accountBalance, Account account, MakePaymentRequest request)
+        [InlineAutoData(AccountStatus.Live, "99999999999.99", PaymentScheme.Bacs, AllowedPaymentSchemes.Bacs)]
+        [InlineAutoData(AccountStatus.Live, "0.01", PaymentScheme.Bacs, AllowedPaymentSchemes.Bacs)]
+        [InlineAutoData(AccountStatus.Live, "0.00", PaymentScheme.Bacs, AllowedPaymentSchemes.Bacs)]
+        [InlineAutoData(AccountStatus.Live, "-0.01", PaymentScheme.Bacs, AllowedPaymentSchemes.Bacs)]
+        [InlineAutoData(AccountStatus.Disabled, "0.01", PaymentScheme.Bacs, AllowedPaymentSchemes.Bacs)]
+        [InlineAutoData(AccountStatus.InboundPaymentsOnly, "0.01", PaymentScheme.Bacs, AllowedPaymentSchemes.Bacs)]
+        //
+        [InlineAutoData(AccountStatus.Live, "99999999999.99", PaymentScheme.FasterPayments, AllowedPaymentSchemes.FasterPayments)]
+        [InlineAutoData(AccountStatus.Live, "0.01", PaymentScheme.FasterPayments, AllowedPaymentSchemes.FasterPayments)]
+        [InlineAutoData(AccountStatus.Live, "0.00", PaymentScheme.FasterPayments, AllowedPaymentSchemes.FasterPayments)]
+        [InlineAutoData(AccountStatus.Live, "-0.01", PaymentScheme.FasterPayments, AllowedPaymentSchemes.FasterPayments)]
+        [InlineAutoData(AccountStatus.Disabled, "0.01", PaymentScheme.FasterPayments, AllowedPaymentSchemes.FasterPayments)]
+        [InlineAutoData(AccountStatus.InboundPaymentsOnly, "0.01", PaymentScheme.FasterPayments, AllowedPaymentSchemes.FasterPayments)]
+        //
+        [InlineAutoData(AccountStatus.Live, "99999999999.99", PaymentScheme.Chaps, AllowedPaymentSchemes.Chaps)]
+        [InlineAutoData(AccountStatus.Live, "0.01", PaymentScheme.Chaps, AllowedPaymentSchemes.Chaps)]
+        [InlineAutoData(AccountStatus.Live, "0.00", PaymentScheme.Chaps, AllowedPaymentSchemes.Chaps)]
+        [InlineAutoData(AccountStatus.Live, "-0.01", PaymentScheme.Chaps, AllowedPaymentSchemes.Chaps)]
+        [InlineAutoData(AccountStatus.Disabled, "0.01", PaymentScheme.Chaps, AllowedPaymentSchemes.Chaps)]
+        [InlineAutoData(AccountStatus.InboundPaymentsOnly, "0.01", PaymentScheme.Chaps, AllowedPaymentSchemes.Chaps)]
+        public void Account_With_PaymentScheme_Allowed_Always_Returns_True_For_Corresponding_PaymentScheme(AccountStatus accountStatus,
+            string accountBalance, PaymentScheme paymentScheme, AllowedPaymentSchemes allowedPaymentScheme, 
+            Account account, MakePaymentRequest request)
         {
             //arrange
-            account.AllowedPaymentSchemes = AllowedPaymentSchemes.Bacs;
+            account.AllowedPaymentSchemes = allowedPaymentScheme;
             account.Status = accountStatus;
             account.Balance = Convert.ToDecimal(accountBalance);
-            request.PaymentScheme = PaymentScheme.Bacs;
+            request.PaymentScheme = paymentScheme;
 
             var sut = new ValidatorService();
 
@@ -53,5 +68,7 @@ namespace ClearBank.DeveloperTest.Tests
             //assert
             result.Should().BeEquivalentTo(new MakePaymentResult { Success = true });
         }
+
+       
     }
 }
