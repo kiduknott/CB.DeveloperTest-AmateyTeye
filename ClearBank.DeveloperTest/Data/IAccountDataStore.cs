@@ -1,8 +1,8 @@
 ﻿using ClearBank.DeveloperTest.Types;
 
-namespace ClearBank.DeveloperTest.Services
+namespace ClearBank.DeveloperTest.Data
 {
-    public interface IAccountService
+    public interface IAccountDataStore
     {
         public Account GetAccount(string accountNumber);
 
