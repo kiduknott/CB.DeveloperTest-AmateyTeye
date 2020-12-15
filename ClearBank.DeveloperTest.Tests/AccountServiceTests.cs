@@ -1,8 +1,11 @@
 ﻿using System;
 using AutoFixture.NUnit3;
+using ClearBank.DeveloperTest.Configuration;
 using ClearBank.DeveloperTest.Data;
+using ClearBank.DeveloperTest.ServiceFactories;
 using ClearBank.DeveloperTest.Services;
 using ClearBank.DeveloperTest.Types;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 
@@ -13,7 +16,7 @@ namespace ClearBank.DeveloperTest.Tests
     {
         [Test]
         [InlineAutoData]
-        public void Calling_GetAccount_Calls_GetAccount_In_The_Account_Data_Store(int acctNumber)
+        public void GetAccount_Calls_GetAccount_In_The_Account_Data_Store(int acctNumber)
         {
             //arrange
             var accountDataStore = new Mock<IAccountDataStore>();
@@ -30,7 +33,7 @@ namespace ClearBank.DeveloperTest.Tests
 
         [Test]
         [InlineAutoData]
-        public void Calling_UpdateAccount_Calls_UpdateAccount_In_The_Account_Data_Store(Account account)
+        public void UpdateAccount_Calls_UpdateAccount_In_The_Account_Data_Store(Account account)
         {
             //arrange
             var accountDataStore = new Mock<IAccountDataStore>();
