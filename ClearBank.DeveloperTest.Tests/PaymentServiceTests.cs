@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoFixture.NUnit3;
+﻿using AutoFixture.NUnit3;
 using ClearBank.DeveloperTest.Services;
 using ClearBank.DeveloperTest.Types;
 using FluentAssertions;
@@ -54,7 +51,7 @@ namespace ClearBank.DeveloperTest.Tests
             var sut = new PaymentService(accountService.Object, validatorService.Object);
 
             //act
-            var result = sut.MakePayment(request);
+            sut.MakePayment(request);
 
             //assert
             account.Balance = account.Balance - request.Amount;
@@ -78,7 +75,7 @@ namespace ClearBank.DeveloperTest.Tests
             var sut = new PaymentService(accountService.Object, validatorService.Object);
 
             //act
-            var result = sut.MakePayment(request);
+            sut.MakePayment(request);
 
             //assert
             accountService.Verify(x => x.UpdateAccount(It.IsAny<Account>()), Times.Never);

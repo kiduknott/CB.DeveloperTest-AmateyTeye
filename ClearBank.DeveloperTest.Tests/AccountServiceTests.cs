@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using AutoFixture.NUnit3;
 using ClearBank.DeveloperTest.Data;
 using ClearBank.DeveloperTest.Services;

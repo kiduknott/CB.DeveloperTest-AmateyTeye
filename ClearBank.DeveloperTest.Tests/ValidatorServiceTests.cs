@@ -14,7 +14,7 @@ namespace ClearBank.DeveloperTest.Tests
         [InlineAutoData(PaymentScheme.Bacs)]
         [InlineAutoData(PaymentScheme.FasterPayments)]
         [InlineAutoData(PaymentScheme.Chaps)]
-        public void Null_Account_Alway_Returns_False_For_All_Payment_Types(PaymentScheme scheme, MakePaymentRequest request)
+        public void Null_Account_Always_Returns_False_For_All_Payment_Types(PaymentScheme scheme, MakePaymentRequest request)
         {
             //arrange
             Account account = null;
