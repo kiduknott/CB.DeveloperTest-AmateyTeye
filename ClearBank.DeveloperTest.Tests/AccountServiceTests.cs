@@ -20,9 +20,13 @@ namespace ClearBank.DeveloperTest.Tests
         {
             //arrange
             var accountDataStore = new Mock<IAccountDataStore>();
-            var accountNumber = Convert.ToString(acctNumber);
+            
+            var serviceFactory = new Mock<IServiceFactory>();
+            serviceFactory.Setup(x => x.GetAccountDataStore()).Returns(accountDataStore.Object);
 
-            var sut = new AccountService(accountDataStore.Object);
+            var accountNumber = Convert.ToString(acctNumber);
+            
+            var sut = new AccountService(serviceFactory.Object);
 
             //act
             sut.GetAccount(accountNumber);
@@ -38,7 +42,11 @@ namespace ClearBank.DeveloperTest.Tests
             //arrange
             var accountDataStore = new Mock<IAccountDataStore>();
 
-            var sut = new AccountService(accountDataStore.Object);
+            var serviceFactory = new Mock<IServiceFactory>();
+            serviceFactory.Setup(x => x.GetAccountDataStore()).Returns(accountDataStore.Object);
+
+
+            var sut = new AccountService(serviceFactory.Object);
 
             //act
             sut.UpdateAccount(account);

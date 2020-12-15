@@ -1,4 +1,5 @@
 ﻿using ClearBank.DeveloperTest.Data;
+using ClearBank.DeveloperTest.ServiceFactories;
 using ClearBank.DeveloperTest.Types;
 
 namespace ClearBank.DeveloperTest.Services
@@ -6,12 +7,12 @@ namespace ClearBank.DeveloperTest.Services
     public class AccountService : IAccountService
     {
         private readonly IAccountDataStore accountDataStore;
-        
-        public AccountService(IAccountDataStore store)
+
+        public AccountService(IServiceFactory serviceFactory)
         {
-            accountDataStore = store;
+            accountDataStore = serviceFactory.GetAccountDataStore();
         }
-        
+
         public Account GetAccount(string accountNumber)
         {
             return accountDataStore.GetAccount(accountNumber);
