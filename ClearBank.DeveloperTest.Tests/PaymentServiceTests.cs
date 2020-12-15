@@ -28,7 +28,7 @@ namespace ClearBank.DeveloperTest.Tests
             validatorService.Setup(x => x.ValidatePayment(account, request))
                 .Returns(new MakePaymentResult { Success = isPaymentValid });
 
-            var sut = new NewPaymentService(accountService.Object, validatorService.Object);
+            var sut = new PaymentService(accountService.Object, validatorService.Object);
 
             //act
             var result = sut.MakePayment(request);
@@ -51,7 +51,7 @@ namespace ClearBank.DeveloperTest.Tests
             validatorService.Setup(x => x.ValidatePayment(account, request))
                 .Returns(new MakePaymentResult { Success = true });
 
-            var sut = new NewPaymentService(accountService.Object, validatorService.Object);
+            var sut = new PaymentService(accountService.Object, validatorService.Object);
 
             //act
             var result = sut.MakePayment(request);
@@ -75,7 +75,7 @@ namespace ClearBank.DeveloperTest.Tests
             validatorService.Setup(x => x.ValidatePayment(account, request))
                 .Returns(new MakePaymentResult { Success = false });
 
-            var sut = new NewPaymentService(accountService.Object, validatorService.Object);
+            var sut = new PaymentService(accountService.Object, validatorService.Object);
 
             //act
             var result = sut.MakePayment(request);

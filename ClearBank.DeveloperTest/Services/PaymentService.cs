@@ -2,12 +2,12 @@
 
 namespace ClearBank.DeveloperTest.Services
 {
-    public class NewPaymentService : IPaymentService
+    public class PaymentService : IPaymentService
     {
         private readonly IAccountService accountService;
         private readonly IValidatorService validatorService;
 
-        public NewPaymentService(IAccountService acctService, IValidatorService validator)
+        public PaymentService(IAccountService acctService, IValidatorService validator)
         {
             accountService = acctService;
             validatorService = validator;
